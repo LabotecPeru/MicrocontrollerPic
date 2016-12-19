@@ -1,0 +1,144 @@
+CCS PCM C Compiler, Version 4.114, 93513558               18-Dic.-16 19:42
+
+               Filename: C:\Users\COMPUTADORA\Desktop\MicrocontrollerPic\2_Display_7segments\main.lst
+
+               ROM used: 96 words (1%)
+                         Largest free fragment is 2048
+               RAM used: 17 (5%) at main() level
+                         18 (5%) worst case
+               Stack:    1 locations
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   01B
+0003:  NOP
+.................... #include <16f877a.h>  
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+.................... #list 
+....................  
+.................... #fuses XT 
+.................... #use delay(clock=4Mhz)  
+0004:  MOVLW  2D
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   018
+000A:  MOVLW  01
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  4A
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  GOTO   016
+0016:  DECFSZ 00,F
+0017:  GOTO   00A
+0018:  BCF    0A.3
+0019:  BCF    0A.4
+001A:  GOTO   05A (RETURN)
+....................  
+.................... void main(void){  
+001B:  CLRF   04
+001C:  BCF    03.7
+001D:  MOVLW  1F
+001E:  ANDWF  03,F
+001F:  BSF    03.5
+0020:  BSF    1F.0
+0021:  BSF    1F.1
+0022:  BSF    1F.2
+0023:  BCF    1F.3
+0024:  MOVLW  07
+0025:  MOVWF  1C
+*
+003B:  CLRF   2B
+....................    int valores[10]={ 0x03F,0x06,0x5B,0x4F,0x66, 
+....................                      0x6D,0x7D,0x47,0x7F,0x67   }; 
+*
+0026:  MOVLW  3F
+0027:  BCF    03.5
+0028:  MOVWF  21
+0029:  MOVLW  06
+002A:  MOVWF  22
+002B:  MOVLW  5B
+002C:  MOVWF  23
+002D:  MOVLW  4F
+002E:  MOVWF  24
+002F:  MOVLW  66
+0030:  MOVWF  25
+0031:  MOVLW  6D
+0032:  MOVWF  26
+0033:  MOVLW  7D
+0034:  MOVWF  27
+0035:  MOVLW  47
+0036:  MOVWF  28
+0037:  MOVLW  7F
+0038:  MOVWF  29
+0039:  MOVLW  67
+003A:  MOVWF  2A
+....................    int i=0;         
+....................    set_tris_a(0x00); 
+*
+003C:  MOVLW  00
+003D:  BSF    03.5
+003E:  MOVWF  05
+....................    set_tris_d(0x00);  
+003F:  MOVWF  08
+....................     
+....................    output_a(0b11110111); 
+0040:  CLRF   05
+0041:  MOVLW  F7
+0042:  BCF    03.5
+0043:  MOVWF  05
+....................    for(;;){ 
+....................       for( i=0; i < 10; i++){ 
+0044:  CLRF   2B
+0045:  MOVF   2B,W
+0046:  SUBLW  09
+0047:  BTFSS  03.0
+0048:  GOTO   05E
+....................          output_d( ~(valores[i]) );  
+0049:  MOVLW  21
+004A:  ADDWF  2B,W
+004B:  MOVWF  04
+004C:  BCF    03.7
+004D:  MOVF   00,W
+004E:  XORLW  FF
+004F:  MOVWF  2C
+0050:  BSF    03.5
+0051:  CLRF   08
+0052:  BCF    03.5
+0053:  MOVF   2C,W
+0054:  MOVWF  08
+....................          delay_ms( 300 ); 
+0055:  MOVLW  02
+0056:  MOVWF  2C
+0057:  MOVLW  96
+0058:  MOVWF  2D
+0059:  GOTO   004
+005A:  DECFSZ 2C,F
+005B:  GOTO   057
+....................       } 
+005C:  INCF   2B,F
+005D:  GOTO   045
+....................    } 
+005E:  GOTO   044
+.................... } 
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+005F:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F71   XT NOWDT PUT BROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

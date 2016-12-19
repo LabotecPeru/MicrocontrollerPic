@@ -1,0 +1,117 @@
+004     @WRITE_PROGRAM_MEMORY8.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+012     T2CONbits
+015     CCP_1
+015     CCPR1L
+015     CCP_1_LOW
+016     CCP_1_HIGH
+017     CCP1CONbits
+01B     CCP_2_LOW
+01B     CCP_2
+01C     CCP_2_HIGH
+020     @TRIS_C
+021     MAIN.duty
+022     @PRINTF_U_91.P1
+022     lcd_init.i
+022     @PSTRINGCN7_91.P1
+022-023 SetPWM1.DutyCycle
+022     MAIN.@SCRATCH1
+022     @PSTRINGC7_91.@SCRATCH1
+023     @PRINTF_U_91.P1
+023     lcd_init.@SCRATCH1
+023     @PSTRINGC7_91.@SCRATCH2
+023     @PSTRINGCN7_91.@SCRATCH1
+024     @DIV88.P1
+024     SetPWM1.@SCRATCH1
+024     @PSTRINGC7_91.@SCRATCH3
+024     @PSTRINGCN7_91.@SCRATCH2
+025     @DIV88.P1
+025     SetPWM1.@SCRATCH2
+025     @PSTRINGCN7_91.@SCRATCH3
+026     lcd_putc.c
+026     @DIV88.@SCRATCH1
+027     lcd_gotoxy.x
+027     @delay_ms1.P1
+028     lcd_gotoxy.y
+029     lcd_gotoxy.address
+02A     lcd_gotoxy.@SCRATCH1
+02B     lcd_send_byte.address
+02C     lcd_send_byte.n
+02D     lcd_read_byte.low
+02D     lcd_send_byte.@SCRATCH1
+02E     lcd_send_nibble.n
+02E     lcd_read_byte.high
+02F     lcd_read_nibble.n
+02F     lcd_read_byte.@SCRATCH1
+030     lcd_read_nibble.@SCRATCH1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+087     TRISCbits
+092     PR2
+09C.6   C1OUT
+09C.7   C2OUT
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+0031  @delay_ms1
+0004  LCD_INIT_STRING
+00AA  lcd_read_byte
+0071  lcd_read_nibble
+0046  lcd_send_nibble
+00A2  lcd_send_byte
+00FE  lcd_init
+013F  lcd_gotoxy
+0151  lcd_putc
+01C6  SetPWM1
+001A  pwm_init
+027C  MAIN
+000C  @const134
+017E  @PSTRINGC7_91
+0010  @const136
+01E3  @PSTRINGCN7_91
+0232  @DIV88
+0247  @PRINTF_U_91
+0015  @const145
+027C  @cinit
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    C:\Users\COMPUTADORA\Desktop\Core_LaboTEC\12_Pwm\
+
+Project Files:
+    main.c
+    ..\..\..\..\..\Program Files (x86)\PICC\devices\16f877a.h
+    ..\..\..\..\..\Program Files (x86)\PICC\drivers\lcd.c
+    ..\LaboTec\pwm.c
+    ..\LaboTec\pwm.h
+
+Units:
+    C:\Users\COMPUTADORA\Desktop\Core_LaboTEC\12_Pwm\main (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      main.err
+    Ext Symbols: main.esym
+    INHX8:       main.hex
+    Symbols:     main.sym
+    List:        main.lst
+    Debug/COFF:  main.cof
+    Project:     main.PJT
+    Call Tree:   main.tre
+    Statistics:  main.sta

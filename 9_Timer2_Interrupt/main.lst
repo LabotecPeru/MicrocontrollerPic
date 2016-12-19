@@ -1,0 +1,149 @@
+CCS PCM C Compiler, Version 4.114, 93513558               18-Dic.-16 17:36
+
+               Filename: C:\Users\COMPUTADORA\Desktop\Core_LaboTEC\9_Timer2_Interrupt\main.lst
+
+               ROM used: 89 words (1%)
+                         Largest free fragment is 2048
+               RAM used: 12 (3%) at main() level
+                         12 (3%) worst case
+               Stack:    2 worst case (1 in main + 1 for interrupts)
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   048
+0003:  NOP
+0004:  MOVWF  7F
+0005:  SWAPF  03,W
+0006:  CLRF   03
+0007:  MOVWF  21
+0008:  MOVF   0A,W
+0009:  MOVWF  20
+000A:  CLRF   0A
+000B:  MOVF   04,W
+000C:  MOVWF  22
+000D:  MOVF   77,W
+000E:  MOVWF  23
+000F:  MOVF   78,W
+0010:  MOVWF  24
+0011:  MOVF   79,W
+0012:  MOVWF  25
+0013:  MOVF   7A,W
+0014:  MOVWF  26
+0015:  BCF    03.7
+0016:  BCF    03.5
+0017:  MOVLW  8C
+0018:  MOVWF  04
+0019:  BTFSS  00.1
+001A:  GOTO   01D
+001B:  BTFSC  0C.1
+001C:  GOTO   02E
+001D:  MOVF   22,W
+001E:  MOVWF  04
+001F:  MOVF   23,W
+0020:  MOVWF  77
+0021:  MOVF   24,W
+0022:  MOVWF  78
+0023:  MOVF   25,W
+0024:  MOVWF  79
+0025:  MOVF   26,W
+0026:  MOVWF  7A
+0027:  MOVF   20,W
+0028:  MOVWF  0A
+0029:  SWAPF  21,W
+002A:  MOVWF  03
+002B:  SWAPF  7F,F
+002C:  SWAPF  7F,W
+002D:  RETFIE
+002E:  BCF    0A.3
+002F:  BCF    0A.4
+0030:  GOTO   031
+.................... #include <16f877a.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+.................... #list 
+....................  
+.................... #fuses xt 
+.................... #use delay(clock=4M) 
+.................... #include "..\LaboTec\timer2.c" 
+.................... #include "timer2.h" 
+.................... #ifndef  __TIMER0__ 
+.................... #define  __TIMER0__ 
+....................  
+.................... #define TMR2_PRESCALER    T2_DIV_BY_4 
+.................... #define TMR2_POSTSCALER   2 
+.................... #define TMR2_PR2          124 
+.................... #define TMR2_SIGNAL       PIN_B0 
+....................  
+.................... void timer2_init(); 
+....................  
+.................... #endif 
+....................  
+....................  
+.................... #INT_TIMER2 
+.................... void TIMER2_isr(){ 
+....................    output_toggle( TMR2_SIGNAL ); 
+0031:  BSF    03.5
+0032:  BCF    06.0
+0033:  MOVLW  01
+0034:  BCF    03.5
+0035:  XORWF  06,F
+.................... } 
+....................  
+0036:  BCF    0C.1
+0037:  BCF    0A.3
+0038:  BCF    0A.4
+0039:  GOTO   01D
+.................... void timer2_init(){ 
+....................    // Generate interrupt each 1ms 
+....................    // TMR2_PRESCALER    = 4 
+....................    // TMR2_POSTSCALER   = 2 
+....................    // TMR2_PR2          = 124 
+....................    setup_timer_2( TMR2_PRESCALER, TMR2_PR2, TMR2_POSTSCALER ); 
+003A:  MOVLW  08
+003B:  MOVWF  78
+003C:  IORLW  05
+003D:  MOVWF  12
+003E:  MOVLW  7C
+003F:  BSF    03.5
+0040:  MOVWF  12
+....................    enable_interrupts( INT_TIMER2 ); 
+0041:  BSF    0C.1
+....................    enable_interrupts( GLOBAL ); 
+0042:  MOVLW  C0
+0043:  BCF    03.5
+0044:  IORWF  0B,F
+.................... } 
+0045:  BCF    0A.3
+0046:  BCF    0A.4
+0047:  GOTO   057 (RETURN)
+....................  
+....................  
+.................... void main(){ 
+0048:  CLRF   04
+0049:  BCF    03.7
+004A:  MOVLW  1F
+004B:  ANDWF  03,F
+004C:  BSF    03.5
+004D:  BSF    1F.0
+004E:  BSF    1F.1
+004F:  BSF    1F.2
+0050:  BCF    1F.3
+0051:  MOVLW  07
+0052:  MOVWF  1C
+....................  
+....................    set_tris_b(0); 
+0053:  MOVLW  00
+0054:  MOVWF  06
+....................    timer2_init(); 
+0055:  BCF    03.5
+0056:  GOTO   03A
+....................     
+....................    for(;;){ 
+....................    } 
+0057:  GOTO   057
+.................... } 
+0058:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F71   XT NOWDT PUT BROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

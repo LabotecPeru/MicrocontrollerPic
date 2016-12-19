@@ -1,0 +1,149 @@
+CCS PCM C Compiler, Version 4.114, 93513558               18-Dic.-16 17:35
+
+               Filename: C:\Users\COMPUTADORA\Desktop\Core_LaboTEC\7_Timer0_Interrupt\main.lst
+
+               ROM used: 89 words (1%)
+                         Largest free fragment is 2048
+               RAM used: 12 (3%) at main() level
+                         12 (3%) worst case
+               Stack:    2 worst case (1 in main + 1 for interrupts)
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   048
+0003:  NOP
+0004:  MOVWF  7F
+0005:  SWAPF  03,W
+0006:  CLRF   03
+0007:  MOVWF  21
+0008:  MOVF   0A,W
+0009:  MOVWF  20
+000A:  CLRF   0A
+000B:  MOVF   04,W
+000C:  MOVWF  22
+000D:  MOVF   77,W
+000E:  MOVWF  23
+000F:  MOVF   78,W
+0010:  MOVWF  24
+0011:  MOVF   79,W
+0012:  MOVWF  25
+0013:  MOVF   7A,W
+0014:  MOVWF  26
+0015:  BCF    03.7
+0016:  BCF    03.5
+0017:  BTFSS  0B.5
+0018:  GOTO   01B
+0019:  BTFSC  0B.2
+001A:  GOTO   02C
+001B:  MOVF   22,W
+001C:  MOVWF  04
+001D:  MOVF   23,W
+001E:  MOVWF  77
+001F:  MOVF   24,W
+0020:  MOVWF  78
+0021:  MOVF   25,W
+0022:  MOVWF  79
+0023:  MOVF   26,W
+0024:  MOVWF  7A
+0025:  MOVF   20,W
+0026:  MOVWF  0A
+0027:  SWAPF  21,W
+0028:  MOVWF  03
+0029:  SWAPF  7F,F
+002A:  SWAPF  7F,W
+002B:  RETFIE
+002C:  BCF    0A.3
+002D:  BCF    0A.4
+002E:  GOTO   02F
+.................... #include <16f877a.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+.................... #list 
+....................  
+.................... #fuses xt 
+.................... #use delay(clock=4M) 
+.................... #include "..\LaboTec\timer0.c" 
+.................... #include "timer0.h" 
+.................... #ifndef  __TIMER0__ 
+.................... #define  __TIMER0__ 
+....................  
+.................... #define TMR0_PRESCALER    RTCC_DIV_8 
+.................... #define TMR0_CHARGE       131 
+.................... #define TMR0_SIGNAL       PIN_B1 
+....................  
+.................... void timer0_init(); 
+....................  
+.................... #endif 
+....................  
+....................  
+.................... #INT_RTCC 
+.................... void TIMER0_isr(){ 
+....................    output_toggle( TMR0_SIGNAL ); 
+002F:  BSF    03.5
+0030:  BCF    06.1
+0031:  MOVLW  02
+0032:  BCF    03.5
+0033:  XORWF  06,F
+....................    set_timer0( TMR0_CHARGE ); 
+0034:  MOVLW  83
+0035:  MOVWF  01
+.................... } 
+....................  
+0036:  BCF    0B.2
+0037:  BCF    0A.3
+0038:  BCF    0A.4
+0039:  GOTO   01B
+.................... void timer0_init(){ 
+....................    // Generate interrupt each 1ms 
+....................    // TMR0_PRESCALER    = 8 
+....................    // TMR0_CHARGE       = 131 
+....................    setup_timer_0( RTCC_INTERNAL | RTCC_DIV_8 ); 
+003A:  BSF    03.5
+003B:  MOVF   01,W
+003C:  ANDLW  C0
+003D:  IORLW  02
+003E:  MOVWF  01
+....................    set_timer0( TMR0_CHARGE ); 
+003F:  MOVLW  83
+0040:  BCF    03.5
+0041:  MOVWF  01
+....................    enable_interrupts( INT_RTCC ); 
+0042:  BSF    0B.5
+....................    enable_interrupts( GLOBAL ); 
+0043:  MOVLW  C0
+0044:  IORWF  0B,F
+.................... } 
+0045:  BCF    0A.3
+0046:  BCF    0A.4
+0047:  GOTO   057 (RETURN)
+....................  
+....................  
+.................... void main(){ 
+0048:  CLRF   04
+0049:  BCF    03.7
+004A:  MOVLW  1F
+004B:  ANDWF  03,F
+004C:  BSF    03.5
+004D:  BSF    1F.0
+004E:  BSF    1F.1
+004F:  BSF    1F.2
+0050:  BCF    1F.3
+0051:  MOVLW  07
+0052:  MOVWF  1C
+....................  
+....................    set_tris_b(0); 
+0053:  MOVLW  00
+0054:  MOVWF  06
+....................    timer0_init(); 
+0055:  BCF    03.5
+0056:  GOTO   03A
+....................     
+....................    for(;;){ 
+....................    } 
+0057:  GOTO   057
+.................... } 
+0058:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F71   XT NOWDT PUT BROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

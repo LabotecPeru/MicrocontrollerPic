@@ -1,0 +1,50 @@
+
+ROM used: 89 (1%)
+          89 (1%) including unused fragments
+
+          0 Average locations per line
+          9 Average locations per statement
+
+RAM used: 12 (3%) at main() level
+          12 (3%) worst case
+
+Stack used: 2 worst case (out of 8 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   14     4  40  main.c
+  330     0   0  ..\..\..\..\..\Program Files (x86)\PICC\devices\16f877a.h
+   18     6  60  ..\LaboTec\timer0.c
+   11     0   0  ..\LaboTec\timer0.h
+----- -----
+  373    10 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     11  12   0    32  1.0  TIMER0_isr
+0     14  16   0    78  1.6  timer0_init
+0     17  19   0    44  1.2  MAIN
+
+Program metrics:
+    Functions               3
+    Statements              10
+    Comments                79
+    Volume (V)              222
+    Difficilty (D)          4.0
+    Effort to implement (E) 888
+    Time to implement (T)   1 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   1
+    Maintainability (MI)    179
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-0002E    43  0  
+0002F-007FF    42  1959  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01FFF     0  2048  
+
+
+

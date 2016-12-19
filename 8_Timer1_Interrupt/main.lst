@@ -1,0 +1,153 @@
+CCS PCM C Compiler, Version 4.114, 93513558               18-Dic.-16 17:36
+
+               Filename: C:\Users\COMPUTADORA\Desktop\Core_LaboTEC\8_Timer1_Interrupt\main.lst
+
+               ROM used: 93 words (1%)
+                         Largest free fragment is 2048
+               RAM used: 12 (3%) at main() level
+                         12 (3%) worst case
+               Stack:    2 worst case (1 in main + 1 for interrupts)
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   04C
+0003:  NOP
+0004:  MOVWF  7F
+0005:  SWAPF  03,W
+0006:  CLRF   03
+0007:  MOVWF  21
+0008:  MOVF   0A,W
+0009:  MOVWF  20
+000A:  CLRF   0A
+000B:  MOVF   04,W
+000C:  MOVWF  22
+000D:  MOVF   77,W
+000E:  MOVWF  23
+000F:  MOVF   78,W
+0010:  MOVWF  24
+0011:  MOVF   79,W
+0012:  MOVWF  25
+0013:  MOVF   7A,W
+0014:  MOVWF  26
+0015:  BCF    03.7
+0016:  BCF    03.5
+0017:  MOVLW  8C
+0018:  MOVWF  04
+0019:  BTFSS  00.0
+001A:  GOTO   01D
+001B:  BTFSC  0C.0
+001C:  GOTO   02E
+001D:  MOVF   22,W
+001E:  MOVWF  04
+001F:  MOVF   23,W
+0020:  MOVWF  77
+0021:  MOVF   24,W
+0022:  MOVWF  78
+0023:  MOVF   25,W
+0024:  MOVWF  79
+0025:  MOVF   26,W
+0026:  MOVWF  7A
+0027:  MOVF   20,W
+0028:  MOVWF  0A
+0029:  SWAPF  21,W
+002A:  MOVWF  03
+002B:  SWAPF  7F,F
+002C:  SWAPF  7F,W
+002D:  RETFIE
+002E:  BCF    0A.3
+002F:  BCF    0A.4
+0030:  GOTO   031
+.................... #include <16f877a.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+.................... #list 
+....................  
+.................... #fuses xt 
+.................... #use delay(clock=4M) 
+.................... #include "..\LaboTec\timer1.c" 
+.................... #include "timer1.h" 
+.................... #ifndef  __TIMER0__ 
+.................... #define  __TIMER0__ 
+....................  
+.................... #define TMR1_PRESCALER    RTCC_DIV_8 
+.................... #define TMR1_CHARGE       65411  
+.................... #define TMR1_SIGNAL       PIN_B0 
+....................  
+.................... void timer1_init(); 
+....................  
+.................... #endif 
+....................  
+....................  
+.................... #INT_TIMER1 
+.................... void TIMER1_isr(){ 
+....................    output_toggle( TMR1_SIGNAL ); 
+0031:  BSF    03.5
+0032:  BCF    06.0
+0033:  MOVLW  01
+0034:  BCF    03.5
+0035:  XORWF  06,F
+....................    set_timer1( TMR1_CHARGE ); 
+0036:  MOVLW  FF
+0037:  MOVWF  0F
+0038:  MOVLW  83
+0039:  MOVWF  0E
+.................... } 
+....................  
+003A:  BCF    0C.0
+003B:  BCF    0A.3
+003C:  BCF    0A.4
+003D:  GOTO   01D
+.................... void timer1_init(){ 
+....................    // Generate interrupt each 1ms 
+....................    // TMR1_PRESCALER    = 8 
+....................    // TMR1_CHARGE       = 65411 
+....................    setup_timer_1( T1_INTERNAL|TMR1_PRESCALER ); 
+003E:  MOVLW  87
+003F:  MOVWF  10
+....................    set_timer1( TMR1_CHARGE ); 
+0040:  MOVLW  FF
+0041:  MOVWF  0F
+0042:  MOVLW  83
+0043:  MOVWF  0E
+....................    enable_interrupts( INT_TIMER1 ); 
+0044:  BSF    03.5
+0045:  BSF    0C.0
+....................    enable_interrupts( GLOBAL ); 
+0046:  MOVLW  C0
+0047:  BCF    03.5
+0048:  IORWF  0B,F
+.................... } 
+0049:  BCF    0A.3
+004A:  BCF    0A.4
+004B:  GOTO   05B (RETURN)
+....................  
+....................  
+.................... void main(){ 
+004C:  CLRF   04
+004D:  BCF    03.7
+004E:  MOVLW  1F
+004F:  ANDWF  03,F
+0050:  BSF    03.5
+0051:  BSF    1F.0
+0052:  BSF    1F.1
+0053:  BSF    1F.2
+0054:  BCF    1F.3
+0055:  MOVLW  07
+0056:  MOVWF  1C
+....................  
+....................    set_tris_b(0); 
+0057:  MOVLW  00
+0058:  MOVWF  06
+....................    timer1_init(); 
+0059:  BCF    03.5
+005A:  GOTO   03E
+....................     
+....................    for(;;){ 
+....................    } 
+005B:  GOTO   05B
+.................... } 
+005C:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F71   XT NOWDT PUT BROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

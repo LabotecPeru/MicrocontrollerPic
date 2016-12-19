@@ -1,0 +1,13 @@
+#include "uart.h"
+
+char data = 0;
+
+#INT_RDA 
+void recibir(){
+   data = getc();
+} 
+
+void uart_init(){
+   enable_interrupts(INT_RDA);
+   enable_interrupts(GLOBAL); 
+}

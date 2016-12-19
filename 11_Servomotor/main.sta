@@ -1,0 +1,69 @@
+
+ROM used: 1424 (17%)
+          1424 (17%) including unused fragments
+
+          2 Average locations per line
+          12 Average locations per statement
+
+RAM used: 20 (5%) at main() level
+          48 (13%) worst case
+
+Stack used: 7 worst case (out of 8 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   31    14  12  main.c
+  330     0   0  ..\..\..\..\..\Program Files (x86)\PICC\devices\16f877a.h
+  411    91  80  ..\..\..\..\..\Program Files (x86)\PICC\drivers\lcd.c
+   25     9   8  ..\LaboTec\servomotor.c
+   30     0   0  ..\LaboTec\servomotor.h
+----- -----
+  827   114 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     21   1   1             @delay_ms1
+0     20   1   1             @delay_us1
+0      8   1   0             @const73
+ Inline        3   751  4.5  lcd_read_byte
+0     49   3   2   254  3.7  lcd_read_nibble
+0     43   3   1   391  2.4  lcd_send_nibble
+0     92   6   3   402  3.6  lcd_send_byte
+0     65   5   2   754  5.0  lcd_init
+0     18   1   4   191  5.8  lcd_gotoxy
+0     45   3   1   354  4.7  lcd_putc
+0     29   2   1    48  1.1  TMR2_isr
+0     19   1   0    88  1.7  servomotor_init
+0    447  31  10   144  3.5  ServoWriteAngle
+0    321  23  16             @ADDFF
+ Inline       13    48  1.1  @MULFF
+ Inline       14    88  1.7  @DIVFF
+ Inline        4   144  3.5  @SFTOI
+0     93   7   5   375  4.5  MAIN
+0      4   0   0             @const118
+0     72   5   3             @PSTRINGC7_91
+0     29   2   2             @ITOF
+
+Program metrics:
+    Functions               14
+    Statements              114
+    Comments                176
+    Volume (V)              6707
+    Difficilty (D)          46.5
+    Effort to implement (E) 311728
+    Time to implement (T)   4 hours, 49 minutes
+    Est Delivered Bugs (B)  2
+    Cyclomatic Complexity   11
+    Maintainability (MI)    69
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-00030    45  0  
+00031-007FF  1375  624  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01FFF     0  2048  
+
+
+

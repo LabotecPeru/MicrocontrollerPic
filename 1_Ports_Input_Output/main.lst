@@ -1,0 +1,164 @@
+CCS PCM C Compiler, Version 4.114, 93513558               18-Dic.-16 18:33
+
+               Filename: C:\Users\COMPUTADORA\Desktop\Core_LaboTEC\1_Ports_Input_Output\main.lst
+
+               ROM used: 115 words (1%)
+                         Largest free fragment is 2048
+               RAM used: 6 (2%) at main() level
+                         7 (2%) worst case
+               Stack:    1 locations
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   019
+0003:  NOP
+.................... // https://www.facebook.com/LaboTecPeru/ 
+.................... #include "16f877a.h" 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+.................... #list 
+....................  
+.................... #fuses   xt 
+.................... #use     delay(clock =4M) 
+0004:  MOVLW  22
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   018
+000A:  MOVLW  01
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  4A
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  GOTO   016
+0016:  DECFSZ 00,F
+0017:  GOTO   00A
+0018:  RETURN
+....................  
+.................... void main(){ 
+0019:  CLRF   04
+001A:  BCF    03.7
+001B:  MOVLW  1F
+001C:  ANDWF  03,F
+001D:  BSF    03.5
+001E:  BSF    1F.0
+001F:  BSF    1F.1
+0020:  BSF    1F.2
+0021:  BCF    1F.3
+0022:  MOVLW  07
+0023:  MOVWF  1C
+....................  
+....................    set_tris_b(0b00001111); 
+0024:  MOVLW  0F
+0025:  MOVWF  06
+....................    port_b_pullups(true); 
+0026:  BCF    01.7
+....................    set_tris_d(0); 
+0027:  MOVLW  00
+0028:  MOVWF  08
+....................    output_d(0xFF); 
+0029:  CLRF   08
+002A:  MOVLW  FF
+002B:  BCF    03.5
+002C:  MOVWF  08
+....................     
+....................    for(;;){ 
+....................       if( input(PIN_B0) == 0 ){ 
+002D:  BSF    03.5
+002E:  BSF    06.0
+002F:  BCF    03.5
+0030:  BTFSC  06.0
+0031:  GOTO   03E
+....................          delay_ms(300); 
+0032:  MOVLW  02
+0033:  MOVWF  21
+0034:  MOVLW  96
+0035:  MOVWF  22
+0036:  CALL   004
+0037:  DECFSZ 21,F
+0038:  GOTO   034
+....................          output_toggle( PIN_D0 );    
+0039:  BSF    03.5
+003A:  BCF    08.0
+003B:  MOVLW  01
+003C:  BCF    03.5
+003D:  XORWF  08,F
+....................       } 
+....................       if( input(PIN_B1) == 0 ){ 
+003E:  BSF    03.5
+003F:  BSF    06.1
+0040:  BCF    03.5
+0041:  BTFSC  06.1
+0042:  GOTO   04F
+....................          delay_ms(300); 
+0043:  MOVLW  02
+0044:  MOVWF  21
+0045:  MOVLW  96
+0046:  MOVWF  22
+0047:  CALL   004
+0048:  DECFSZ 21,F
+0049:  GOTO   045
+....................          output_toggle( PIN_D1 );    
+004A:  BSF    03.5
+004B:  BCF    08.1
+004C:  MOVLW  02
+004D:  BCF    03.5
+004E:  XORWF  08,F
+....................       } 
+....................       if( input(PIN_B2) == 0 ){ 
+004F:  BSF    03.5
+0050:  BSF    06.2
+0051:  BCF    03.5
+0052:  BTFSC  06.2
+0053:  GOTO   060
+....................          delay_ms(300); 
+0054:  MOVLW  02
+0055:  MOVWF  21
+0056:  MOVLW  96
+0057:  MOVWF  22
+0058:  CALL   004
+0059:  DECFSZ 21,F
+005A:  GOTO   056
+....................          output_toggle( PIN_D2 );    
+005B:  BSF    03.5
+005C:  BCF    08.2
+005D:  MOVLW  04
+005E:  BCF    03.5
+005F:  XORWF  08,F
+....................       } 
+....................       if( input(PIN_B3) == 0 ){ 
+0060:  BSF    03.5
+0061:  BSF    06.3
+0062:  BCF    03.5
+0063:  BTFSC  06.3
+0064:  GOTO   071
+....................          delay_ms(300); 
+0065:  MOVLW  02
+0066:  MOVWF  21
+0067:  MOVLW  96
+0068:  MOVWF  22
+0069:  CALL   004
+006A:  DECFSZ 21,F
+006B:  GOTO   067
+....................          output_toggle( PIN_D3 );    
+006C:  BSF    03.5
+006D:  BCF    08.3
+006E:  MOVLW  08
+006F:  BCF    03.5
+0070:  XORWF  08,F
+....................       } 
+....................    } 
+0071:  GOTO   02D
+.................... } 
+0072:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F71   XT NOWDT PUT BROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT
